@@ -5,9 +5,18 @@
   "main": "lib/logger.js",
   "author": "Mateusz Szarek <mateusz.szarek10@gmail.com>",
   "license": "MIT",
-  "private": true,
   "files": [
     "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyperflow-wms/hyperflow-autoscaler-plugin"
+  },
+  "homepage": "https://github.com/hyperflow-wms/hyperflow-autoscaler-plugin#readme",
+  "keywords": [
+    "hyperflow",
+    "wms",
+    "workflow"
   ],
   "scripts": {
     "build": "run-s clean build:tsc",
