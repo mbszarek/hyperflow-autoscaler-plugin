@@ -1,5 +1,5 @@
 TAG = $(shell git describe --tags --always)
-PREFIX = localhost:5000/mbszarek
+PREFIX = mbszarek
 BASE_REPO_NAME = base-image
 REPO_NAME = hyperflow-standalone-autoscaler
 
