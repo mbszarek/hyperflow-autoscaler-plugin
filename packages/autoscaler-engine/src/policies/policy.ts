@@ -52,11 +52,13 @@ abstract class Policy {
     if (this.wfTrackers.has(wfId)) {
       Logger.info(`[Policy] Workflow ${wfId} already exists`);
     } else {
+      Logger.info(`[Policy] Adding workflow with wfId ${wfId}`);
       this.wfTrackers.set(wfId, wfTracker);
     }
   }
 
   public removeWfTracker(wfId: string): void {
+    Logger.info(`[Policy] Deleting workflow with wfId ${wfId}`);
     this.wfTrackers.delete(wfId);
   }
 

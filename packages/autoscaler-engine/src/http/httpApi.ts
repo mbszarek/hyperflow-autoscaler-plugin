@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Application } from 'express';
@@ -88,11 +89,19 @@ class HttpApi {
         req: express.Request,
         res: express.Response
       ): Promise<express.Response> => {
+        const fnName = req.params.fnName;
         const wfId = req.query.wfId;
-        if (wfId) {
-          const result = await this.handleRequest(req)
-            .then(() => res.sendStatus(200))
-            .catch(() => res.sendStatus(500));
+        Logger.debug(`[HTTP] Received /call/${fnName} for wfId ${wfId} request`);
+        if (wfId !== undefined) {
+          let result: express.Response<any, Record<string, any>>;
+
+          try {
+            await this.handleRequest(wfId as string, fnName, req);
+            result = res.sendStatus(200);
+          } catch (err) {
+            result = res.sendStatus(500);
+          }
+
           return result;
         } else {
           Logger.warn(`No wfId in incoming request`);
@@ -108,10 +117,7 @@ class HttpApi {
     });
   }
 
-  private async handleRequest(req: express.Request): Promise<void> {
-    Logger.debug(`[HTTP] Handling request: ${JSON.stringify(req)}`);
-    const fnName = req.params['fnName'];
-    const wfId = req.params['wfId'];
+  private async handleRequest(wfId: string, fnName: string, req: express.Request): Promise<void> {
     const fn = this.api_object[fnName];
     if (fn === undefined) {
       Logger.error(`[HTTP] No ${fnName} function registered`);
@@ -135,6 +141,8 @@ class HttpApi {
       const result = fn.apply(this.api_object, [wfId].concat(args));
       Logger.trace(`[HTTP] Sending result: ${JSON.stringify(result)}`);
     }
+
+    return;
   }
 }
 

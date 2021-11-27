@@ -23,5 +23,8 @@
     "eslint": "^8.2.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0"
+  },
+  "bin": {
+    "autoscaler-engine": "./lib/main.js"
   }
 }

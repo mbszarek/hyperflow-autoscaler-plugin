@@ -184,7 +184,7 @@ class KindProvider extends BaseProvider {
     }
 
     const cmd = 'kubectl';
-    const args = ['drain', '--ignore-daemonsets', '--delete-local-data', nodeName];
+    const args = ['drain', '--ignore-daemonsets', '--delete-emptydir-data', nodeName];
     Logger.debug(
       '[KindProvider] Executing ' +
         cmd +

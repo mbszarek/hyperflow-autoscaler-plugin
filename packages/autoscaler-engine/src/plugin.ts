@@ -5,9 +5,11 @@ import API from './hyperflow/api';
 
 import RPCParent from './communication/rpcParent';
 import * as child_process from 'child_process';
+import { HyperFlowPlugin } from '@hyperflow/plugin';
+
 const Logger = getBaseLogger();
 
-class AutoscalerPlugin {
+class AutoscalerPlugin implements HyperFlowPlugin {
   private providerName: string;
   private constructorSuccess = false;
   private wfId!: string;

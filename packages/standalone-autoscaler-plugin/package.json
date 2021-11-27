@@ -1,8 +1,8 @@
 {
-  "name": "hyperflow-standalone-autoscaler-plugin",
+  "name": "@hyperflow/standalone-autoscaler-plugin",
   "version": "0.0.1",
   "description": "Standalone Autoscaler plugin for HyperFlow",
-  "main": "index.js",
+  "main": "lib/plugin.js",
   "author": "Mateusz Szarek <mateusz.szarek10@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "@hyperflow/logger": "^0.0.1",
+    "@hyperflow/plugin": "^0.0.1",
     "@hyperflow/types": "^0.0.1",
-    "node-fetch": "^3.1.0"
+    "cross-fetch": "^3.1.4"
   }
 }

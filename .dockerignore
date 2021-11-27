@@ -1,1 +1,5 @@
-dist
+**/dist/
+**/lib/
+**/node_modules/
+**/assets/
+.vscode

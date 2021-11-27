@@ -20,20 +20,20 @@ const N1_HIGHMEM_96 = 'n1_highmem_96';
 /* Table of allocatable resources.
  * See: https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture */
 const specsMap: MachinesSpecsMap = {
-  [N1_HIGHCPU_2]: { cpu: '1.93', memory: '1.3G' },
+  [N1_HIGHCPU_2]: { cpu: '1.93', memory: '1.25G' },
   [N1_HIGHCPU_4]: { cpu: '3.92', memory: '2.6G' },
-  [N1_HIGHCPU_8]: { cpu: '7.91', memory: '5.5G' },
-  [N1_HIGHCPU_16]: { cpu: '15.89', memory: '11.9G' },
-  [N1_HIGHCPU_32]: { cpu: '31.85', memory: '25.3G' },
-  [N1_HIGHCPU_64]: { cpu: '63.77', memory: '52.5G' },
-  [N1_HIGHCPU_96]: { cpu: '95.69', memory: '79.6G' },
-  [N1_HIGHMEM_2]: { cpu: '1.93', memory: '10.7G' },
-  [N1_HIGHMEM_4]: { cpu: '3.92', memory: '22.8G' },
-  [N1_HIGHMEM_8]: { cpu: '7.91', memory: '47.2G' },
-  [N1_HIGHMEM_16]: { cpu: '15.89', memory: '96.0G' },
-  [N1_HIGHMEM_32]: { cpu: '31.85', memory: '197.4G' },
-  [N1_HIGHMEM_64]: { cpu: '63.77', memory: '400.8G' },
-  [N1_HIGHMEM_96]: { cpu: '95.69', memory: '605.1G' }
+  [N1_HIGHCPU_8]: { cpu: '7.91', memory: '5.46G' },
+  [N1_HIGHCPU_16]: { cpu: '15.89', memory: '11.86G' },
+  [N1_HIGHCPU_32]: { cpu: '31.85', memory: '25.332G' },
+  [N1_HIGHCPU_64]: { cpu: '63.77', memory: '52.404G' },
+  [N1_HIGHCPU_96]: { cpu: '95.69', memory: '79.476G' },
+  [N1_HIGHMEM_2]: { cpu: '1.93', memory: '10.6G' },
+  [N1_HIGHMEM_4]: { cpu: '3.92', memory: '22.7G' },
+  [N1_HIGHMEM_8]: { cpu: '7.91', memory: '47.14G' },
+  [N1_HIGHMEM_16]: { cpu: '15.89', memory: '96.02G' },
+  [N1_HIGHMEM_32]: { cpu: '31.85', memory: '196.98G' },
+  [N1_HIGHMEM_64]: { cpu: '63.77', memory: '400.82G' },
+  [N1_HIGHMEM_96]: { cpu: '95.69', memory: '604.66G' }
 };
 
 class GCPMachines {

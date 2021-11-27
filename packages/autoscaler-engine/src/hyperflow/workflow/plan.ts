@@ -58,24 +58,25 @@ class Plan {
     });
 
     /* Get execution start. */
-    this.trackers.forEach((tracker) => {
+    const executionStartMap = new Map(Array.from(this.trackers.values()).map((tracker) => {
       const executionStartTime = tracker.getExecutionStartTime();
       if (executionStartTime === undefined) {
         throw Error(
           'After notyfing start, the execution start should be already set!'
         );
       }
-    });
+      return [tracker, executionStartTime];
+    }));
 
     /* TMP FIX: we do not know when process was really started, so we suppose all just started.
      * To achieve thse, we reset all start times in 'process' + procHistory.... */
-    this.trackers.forEach((tracker) => tracker.resetAllRunningProcesses);
+    this.trackers.forEach((tracker) => tracker.resetAllRunningProcesses());
 
     /* Cyclic: grab running processes and fast-forward them with estimations. */
     const BreakException = {};
     try {
       this.trackers.forEach((tracker) => {
-        const executionStartTime = tracker.getExecutionStartTime();
+        const executionStartTime = executionStartMap.get(tracker);
         const REF_runningProcessIds = tracker.getRunningProcessIds();
         while (REF_runningProcessIds.size > 0) {
           /* Predict end time of each process. */
@@ -105,7 +106,7 @@ class Plan {
             );
 
             /* Stop if we go further in time than it was allowed. */
-            if (executionStartTime == undefined) {
+            if (executionStartTime === undefined) {
               throw Error('Fatal error - no execution start time defined');
             }
             //const totalPlanningTime = processStartTime - executionStartTime;
@@ -160,7 +161,7 @@ class Plan {
     if (!this.procHistory.has(wfId)) {
       this.procHistory.set(wfId, new Map());
     }
-    if (this.procHistory.get(wfId)!.has(timeMs) == false) {
+    if (!this.procHistory.get(wfId)!.has(timeMs)) {
       this.procHistory.get(wfId)!.set(timeMs, new Set());
     }
     this.procHistory.get(wfId)!.get(timeMs)?.add(processId);
@@ -178,7 +179,7 @@ class Plan {
     if (!this.procHistory.has(wfId)) {
       this.procHistory.set(wfId, new Map());
     }
-    if (this.procHistory.get(wfId)!.has(timeMs) == false) {
+    if (!this.procHistory.get(wfId)!.has(timeMs)) {
       this.procHistory.get(wfId)!.set(timeMs, new Set());
     }
     this.procHistory

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import fetch from 'node-fetch';
+import fetch from 'cross-fetch';
 import { getBaseLogger } from '@hyperflow/logger';
 
 const Logger = getBaseLogger();
@@ -17,13 +17,26 @@ export default class AutoscalerClient {
   }
 
   public async checkConnection(): Promise<boolean> {
+    Logger.debug('[HTTP] Checking hyperflow-standalone-autoscaler connection');
     const healthStatusRequest = await fetch(`${this.url}/health`);
     if (healthStatusRequest.status === 200) {
       const responseStatus =
         (await healthStatusRequest.json()) as HealthCheckResponse;
-      if (responseStatus.status === 'healthy') return true;
-      else return false;
+      if (responseStatus.status === 'healthy') {
+        Logger.debug(
+          '[HTTP] Connection with hyperflow-standalone-autoscaler established successfully'
+        );
+        return true;
+      } else {
+        Logger.error(
+          `[HTTP] Connection unsuccessful, status: ${responseStatus.status}`
+        );
+        return false;
+      }
     } else {
+      Logger.error(
+        `[HTTP] Error response from hyperflow-standalone-autoscaler, status: ${healthStatusRequest.status}`
+      );
       return false;
     }
   }
@@ -44,11 +57,13 @@ export default class AutoscalerClient {
       },
       body: JSON.stringify(payload)
     });
+    return;
   }
 
   public async markWorkflowFinished(wfId: string): Promise<void> {
     Logger.debug(`[HTTP] Marking workflow (${wfId}) as finished`);
     await fetch(`${this.url}/workflow/finish?wfId=${wfId}`, { method: 'POST' });
+    return;
   }
 
   public async sendEvent(
@@ -67,5 +82,6 @@ export default class AutoscalerClient {
       },
       body: JSON.stringify(payload)
     });
+    return;
   }
 }

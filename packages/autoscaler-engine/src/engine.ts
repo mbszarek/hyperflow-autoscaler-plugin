@@ -148,10 +148,16 @@ class Engine {
         numWorkers
       );
       const machinesDiff = scalingDecision.getMachinesDiff();
-      const delayMs = Math.max(
-        0,
-        scalingDecision.getTime() - new Date().getTime()
-      ); // Cap delay at 0ms.
+      const timestamp = new Date().getTime();
+      const delayMs = Math.max(0, scalingDecision.getTime() - timestamp); // Cap delay at 0ms.
+      const message = {
+        demand: demand.toString(),
+        supply: supply.toString(),
+        nodeWorkers: numWorkers,
+        machinesDiff: machinesDiff,
+        timestamp: timestamp,
+      };
+      Logger.info(JSON.stringify(message));
       Logger.debug(
         '[Engine] Recomended action: ' +
           scalingDecision.getMachinesDiff().toString() +

@@ -46,36 +46,36 @@ class GCPBillingModel extends BillingModel {
    */
   public getHourlyPrice(machine: MachineType): number {
     const name = machine.getName();
-    /* Note: this are prices for us-central-1 zone. */
+    /* Note: this are prices for europe-west2 zone. */
     switch (name) {
       case N1_HIGHCPU_2:
-        return 0.0708486;
+        return 0.0912;
       case N1_HIGHCPU_4:
-        return 0.1416972;
+        return 0.1824;
       case N1_HIGHCPU_8:
-        return 0.2833944;
+        return 0.3648;
       case N1_HIGHCPU_16:
-        return 0.5667888;
+        return 0.7296;
       case N1_HIGHCPU_32:
-        return 1.1335776;
+        return 1.4592;
       case N1_HIGHCPU_64:
-        return 2.2671552;
+        return 2.9184;
       case N1_HIGHCPU_96:
-        return 3.4007328;
+        return 4.3776;
       case N1_HIGHMEM_2:
-        return 0.118303;
+        return 0.1523;
       case N1_HIGHMEM_4:
-        return 0.236606;
+        return 0.3046;
       case N1_HIGHMEM_8:
-        return 0.473212;
+        return 0.6092;
       case N1_HIGHMEM_16:
-        return 0.946424;
+        return 1.2184;
       case N1_HIGHMEM_32:
-        return 1.892848;
+        return 2.4368;
       case N1_HIGHMEM_64:
-        return 3.785696;
+        return 4.8736;
       case N1_HIGHMEM_96:
-        return 5.678544;
+        return 7.3104;
       default:
     }
     throw Error('Unknown price for machine ' + name);

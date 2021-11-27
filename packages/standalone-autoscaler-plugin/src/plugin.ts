@@ -3,10 +3,11 @@ import { RedisClient } from 'redis';
 import { HFEngine, HFWflib, WFConfig } from '@hyperflow/types';
 import { getBaseLogger } from '@hyperflow/logger';
 import AutoscalerClient from './http/autoscalerClient';
+import { HyperFlowPlugin } from '@hyperflow/plugin';
 
 const Logger = getBaseLogger();
 
-class StandaloneAutoscalerPlugin {
+class StandaloneAutoscalerPlugin implements HyperFlowPlugin {
   private autoscalerClient!: AutoscalerClient;
   private constructorSuccess = false;
   private wfId!: string;
@@ -14,10 +15,13 @@ class StandaloneAutoscalerPlugin {
   public readonly pgType = 'scheduler';
 
   constructor() {
+    Logger.debug(
+      '[StandaloneAutoscalerPlugin] Creating standalone autoscaler plugin'
+    );
     const autoscalerUrl = process.env['HF_VAR_autoscalerAddress'];
     if (autoscalerUrl === undefined) {
       Logger.error(
-        '[main] No valid address specified. Hint: use env var HF_VAR_autoscalerAddress'
+        '[StandaloneAutoscalerPlugin] No valid address specified. Hint: use env var HF_VAR_autoscalerAddress'
       );
       return;
     }
@@ -26,8 +30,8 @@ class StandaloneAutoscalerPlugin {
   }
 
   async init(
-    _rcl: RedisClient,
-    _wflib: HFWflib,
+    rcl: RedisClient,
+    wflib: HFWflib,
     engine: HFEngine,
     config: WFConfig
   ): Promise<void> {
@@ -38,6 +42,7 @@ class StandaloneAutoscalerPlugin {
       return;
     }
     this.wfId = config.wfId;
+    Logger.debug('[StandaloneAutoscalerPlugin] Initializing');
     const connectionStatus = await this.autoscalerClient.checkConnection();
 
     if (!connectionStatus) {

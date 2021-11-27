@@ -3,11 +3,23 @@ import { getBaseLogger } from '@hyperflow/logger';
 import ResourceRequirements from '../../kubernetes/resourceRequirements';
 import Timeframe from '../../utils/timeframe';
 import { ScalingResult, ScoreOptions } from './scalingResult';
+import MachineType from '../../cloud/machine';
+import BillingModel from '../../cloud/billingModel';
+import ScalingDecision from './scalingDecision';
 
 const Logger = getBaseLogger();
 
 const DEFAULT_SCALING_PROBE_TIME_MS = 10000; // 10 seconds scaling precision is completely enough
-const MAX_MACHINES = 8;
+
+const parseMaxMachines = (): number => {
+  const envVar = process.env['HF_VAR_MAX_MACHINES'];
+  if (envVar && isNaN(parseInt(envVar)) === false) {
+    return parseInt(envVar);
+  }
+  return 8;
+};
+
+const MAX_MACHINES = parseMaxMachines();
 
 type timestamp = number;
 type milliseconds = number;
@@ -242,7 +254,3 @@ class ScalingOptimizer {
 }
 
 export default ScalingOptimizer;
-
-import MachineType from '../../cloud/machine';
-import BillingModel from '../../cloud/billingModel';
-import ScalingDecision from './scalingDecision';

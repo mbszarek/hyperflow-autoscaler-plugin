@@ -1,0 +1,10 @@
+# dependencies
+/node_modules
+
+# generated dist files
+/dist
+/lib
+
+# testing output
+/.nyc_output
+/coverage
