@@ -7,6 +7,8 @@ const Logger = getBaseLogger();
 class Client {
   static readonly hfMasterLabel = 'node-role.hyperflow.local/master';
   static readonly hfWorkerLabel = 'node-role.hyperflow.local/worker';
+  static readonly gcpLabel = 'cloud.google.com/gke-nodepool';
+  static readonly gcpDefaultPool = 'default-pool';
   static readonly hfNodeTypeLabel = 'nodetype';
   static readonly hfNodeTypeWorkerLabel = 'worker';
 
@@ -55,11 +57,9 @@ class Client {
         throw Error('Node does not contain name');
       }
       // const workerLabel = labels[Client.hfWorkerLabel];
-      const workerLabel = labels[Client.hfNodeTypeLabel];
-      if (
-        workerLabel === undefined ||
-        workerLabel !== Client.hfNodeTypeWorkerLabel
-      ) {
+      const gcpLabel = labels[Client.gcpLabel];
+      // const workerLabel = labels[Client.hfNodeTypeLabel];
+      if (gcpLabel === undefined || gcpLabel !== Client.gcpDefaultPool) {
         Logger.info(
           '[Client] Skipping node ' + nodeName + ' (no worker label)'
         );
@@ -146,7 +146,9 @@ class Client {
       podsOnWorkers.push(pod);
     }
 
-    Logger.info(`Worker nodes ${workerNodes.map(node => node.metadata?.name)}`);
+    Logger.info(
+      `Worker nodes ${workerNodes.map((node) => node.metadata?.name)}`
+    );
 
     Logger.debug(
       '[Client] Filtered out ' +

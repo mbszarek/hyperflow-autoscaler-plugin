@@ -17,7 +17,7 @@ const lut = {
   //*/
 
   // Montage (2.0)
-  /*
+
   "mProjectPP": 0.7 * 1000,
   "mDiffFit": 0.1 * 1000,
   "mConcatFit": 12 * 1000,
@@ -27,7 +27,8 @@ const lut = {
   "mAdd": 20.4 * 1000,
   "mShrink": 2 * 1000,
   "mViewer": 1.2 * 1000,
-  */
+  "mJPEG": 1.2 * 1000,
+
 
   // Montage-2MASS (1.0)
   /*
@@ -43,14 +44,14 @@ const lut = {
 
   // Montage-SDSS (2.0)
   ///*
-  mProject: 246.1 * 1000,
+/*   mProject: 246.1 * 1000,
   mDiffFit: 0.2 * 1000,
   mConcatFit: 17 * 1000,
   mBgModel: 5.6 * 1000,
   mBackground: 3.3 * 1000,
   mImgtbl: 2.7 * 1000,
   mAdd: 50.6 * 1000,
-  mViewer: 41.6 * 1000,
+  mViewer: 41.6 * 1000, */
   //*/
 
   // SoyKB (104)
