@@ -1,6 +1,6 @@
 {
   "name": "@hyperflow/plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "HyperFlow plugin interface",
   "main": "lib/index.js",
   "author": "Mateusz Szarek <mateusz.szarek10@gmail.com>",
@@ -24,7 +24,7 @@
     "clean": "rimraf lib coverage tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@hyperflow/types": "^0.0.1",
+    "@hyperflow/types": "^0.0.2",
     "redis": "^3.1.2"
   },
   "devDependencies": {

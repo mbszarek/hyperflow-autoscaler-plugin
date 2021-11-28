@@ -1,6 +1,6 @@
 {
   "name": "@hyperflow/logger",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Logger for HyperFlow",
   "main": "lib/logger.js",
   "author": "Mateusz Szarek <mateusz.szarek10@gmail.com>",

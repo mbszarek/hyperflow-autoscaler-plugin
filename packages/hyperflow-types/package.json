@@ -1,6 +1,6 @@
 {
   "name": "@hyperflow/types",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Types for HyperFlow",
   "main": "lib/types.js",
   "author": "Mateusz Szarek <mateusz.szarek10@gmail.com>",
